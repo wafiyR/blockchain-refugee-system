@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Refugee System</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- <script src="./node_modules/web3/dist/web3.min.js"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script> -->
+    <script src="jquery.js"></script>
+    <script src="registration.js"></script>
+    <!--type="text/javascript"-->
+
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+            border-right: 1px solid #bbb;
+        }
+
+        li:last-child {
+            border-right: none;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #111;
+        }
+
+        .active {
+            background-color: #4CAF50;
+        }
+    </style>
+
+</head>
+
+<body style="background-image:url('bg7.jpg'); background-repeat: no-repeat; background-position: center; ">
+
+    <ul>
+        <li id="homePage"><a  href="#home">Home</a></li>
+        <li id="searchPage"><a href="#search">Search</a></li>
+        <li id="registerPage"><a class="active" href="#register">Register</a></li>
+        <li id="cardPage"><a href="#card">UNHCR Card</a></li>
+        <li id="mapPage"><a href="#map">Map</a></li>
+        <li id="qrCodePage" style="float:right"><a href="#placement">QR Code</a></li>
+    </ul>
+
+
+    <br><br><br>
+
+    <div class="header">
+        <h3>Refugee System</h3>
+    </div>
+
+
+    <form name="registration">
+        <!--method ="GET"-->
+
+        <div class="input-group">
+            <label>UNHCR Number</label>
+            <input type="text" id="unhcrNum" placeholder="791-00C12345" value="" required>
+        </div>
+
+        <div class="input-group">
+            <label>First name</label>
+            <input type="text" id="fName" placeholder="First Name" value="" required>
+        </div>
+
+        <div class="input-group">
+            <label>Last name</label>
+            <input type="text" id="lName" placeholder="Last Name" value="" required>
+        </div>
+
+        <div class="input-group">
+            <label>Sex</label>
+            <input type="text" id="sex" placeholder="Male/Female" value="" required>
+        </div>
+
+        <div class="input-group">
+            <label>Country of Origin</label>
+            <input type="text" id="originCountry" placeholder="Country of Origin" value="" required>
+        </div>
+
+        <!--        <div class="input-group">
+                <label></label>
+
+            </div> -->
+
+        <input type="submit" hidden=""> <!-- somehoe necessary -->
+
+        <div class="input-group"> <button type="submit" class="btn" id="btnRegister" value="Submit"
+                onClick="App.setRefugee()" style="cursor:pointer;">Register</button> </div>
+        <!--change id to name? vice versa-->
+
+        <!-- <button id="nextPage" class="nextBtn">Next &raquo;</button> -->
+
+        <!--        <button id="searchPage" class="searchBtn">Search Menu </button> -->
+
+
+        <!--what's the diff of onclick and onClick?-->
+        <!-- App.registerRefugee()? or App.registerRefugee();? -->
+
+    </form>
+
+    <br><br>
+
+    <!--     <button id="cardPage" class="cardBtn"
+        style="padding: 10px; font-size: 15px; color: white; background: rgb(85, 148, 150); border: none; border-radius: 5px; position:absolute; top: 750px; left: 875px; cursor:pointer;">Generate
+        UNHCR Card</button> -->
+
+    <br><br><br>
+
+    <!-- <p id="blockNumber" style="text-align: center;"></p> -->
+
+    <br><br><br>
+
+    <p id="output" style="text-align: center;"></p>
+
+    <br><br><br>
+
+    <!-- <h1 style="text-align: center;">UNHCR Card</h1> -->
+
+    <br><br><br>
+
+    <!--      <div id="cardTemplate">
+
+        <div class="unhcrCard" style="display: none">
+            
+
+            <p style="text-align: center;">UNHCR NO:</p>
+            <p class="card_number" style="text-align: center;"></p>
+            <br>
+            <p style="text-align: center;">First Name:</p>
+            <p class="card_fName" style="text-align: center;"></p>
+            <p style="text-align: center;">Last Name:</p>
+            <p class="card_lName" style="text-align: center;"></p>
+            <br>
+            <p style="text-align: center;">Sex:</p>
+            <p class="card_sex" style="text-align: center;"></p>
+            <br>
+            <p style="text-align: center;">Country of Origin:</p>
+            <p class="card_country" style="text-align: center;"></p>
+
+        </div>
+
+    </div>  -->
+
+    <script>
+
+        var button = document.getElementById('homePage');
+        button.addEventListener('click', function () {
+            document.location.href = 'home.html';
+        });
+
+        var button = document.getElementById('registerPage');
+        button.addEventListener('click', function () {
+            document.location.href = 'register.html';
+        });
+
+        var button = document.getElementById('mapPage');
+        button.addEventListener('click', function () {
+            document.location.href = 'map.html';
+        });
+
+        var button = document.getElementById('searchPage');
+        button.addEventListener('click', function () {
+            document.location.href = 'display.html';
+        });
+
+        var button = document.getElementById('cardPage');
+        button.addEventListener('click', function () {
+            document.location.href = 'card.html';
+        });
+
+        var button = document.getElementById('qrCodePage');
+        button.addEventListener('click', function () {
+            document.location.href = 'donate.html';
+        });
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <script src="./js/web3.min.js"></script>
+
+    <script src="./js/truffle-contract.js"></script>
+
+    <script src="app.js"></script>
+
+    <script>
+
+        if (typeof web3 !== 'undefined') {
+            web3 = new Web3(web3.currentProvider);
+        } else {
+            // set the provider you want from Web3.providers
+            web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:6565"));
+        }
+
+        web3.eth.defaultAccount = web3.eth.accounts[0];
+
+        function getAddress() {
+            // var Accounts = require('web-eth-accounts');
+
+            // var accounts = new Accounts('ws:localhost:6565')
+
+            var Web3 = require("web3");
+
+            var web3 = new Web3('http://localhost:6565');
+
+            // var account = web3.eth.accounts.create([entropy]);
+            var account = web3.eth.accounts.create();
+
+            var ethAddress = account.address;
+
+
+            document.getElementById("ethAddress").innerHTML = ethAddress;
+
+        }
+
+    </script>
+
+</body>
+
+</html>

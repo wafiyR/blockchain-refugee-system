@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html>
+
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+            border-right: 1px solid #bbb;
+        }
+
+        li:last-child {
+            border-right: none;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #111;
+        }
+
+        .active {
+            background-color: #4CAF50;
+        }
+    </style>
+
+    <ul>
+        <li id="homePage"><a  href="#home">Home</a></li>
+        <li id="searchPage"><a href="#search">Search</a></li>
+        <li id="registerPage"><a href="#register">Register</a></li>
+        <li id="cardPage"><a href="#card">UNHCR Card</a></li>
+        <li id="mapPage"><a class="active" href="#map">Map</a></li>
+        <li id="qrCodePage" style="float:right"><a href="#placement">QR Code</a></li>
+    </ul>
+    <!-- <script type="text/javascript">
+
+
+        App = {
+
+            contracts: {},
+
+            load: async () => {
+                await App.loadWeb3()
+                await App.loadAccount()
+                await App.loadContract()
+                await App.render()
+            },
+
+            // https://medium.com/metamask/https-medium-com-metamask-breaking-change-injecting-web3-7722797916a8
+            loadWeb3: async () => {
+                if (typeof web3 !== 'undefined') {
+                    App.web3Provider = web3.currentProvider
+                    web3 = new Web3(web3.currentProvider)
+                } else {
+                    window.alert("Please connect to Metamask.")
+                }
+                // Modern dapp browsers...
+                if (window.ethereum) {
+                    window.web3 = new Web3(ethereum)
+                    try {
+                        // Request account access if needed
+                        await ethereum.enable()
+                        // Acccounts now exposed
+                        web3.eth.sendTransaction({/* ... */ })
+                    } catch (error) {
+                        // User denied account access...
+                    }
+                }
+                // Legacy dapp browsers...
+                else if (window.web3) {
+                    App.web3Provider = web3.currentProvider
+                    window.web3 = new Web3(web3.currentProvider)
+                    // Acccounts always exposed
+                    web3.eth.sendTransaction({/* ... */ })
+                }
+                // Non-dapp browsers...
+                else {
+                    console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
+                }
+            },
+
+            loadAccount: async () => {
+                // Set the current blockchain account
+                App.account = web3.eth.accounts[0]
+            },
+
+            loadContract: async () => {
+                // Create a JavaScript version of the smart contract
+                const regRefugee = await $.getJSON('Register.json')
+                App.contracts.Register = TruffleContract(regRefugee)
+                App.contracts.Register.setProvider(App.web3Provider)
+
+                // Hydrate the smart contract with values from the blockchain
+                App.regRefugee = await App.contracts.Register.deployed()
+            },
+
+            render: async () => {
+
+
+                const refugeeCount = await App.regRefugee.refugeeCount()
+                const $taskTemplate = $('.mapData')
+
+                var _country = new Array(1000);
+
+                //var count = 4
+
+                for (var i = 1; i <= refugeeCount; i++) {
+
+                    const refugee = await App.regRefugee.refugees(i)
+
+                    const unhcrNum = refugee[1]
+                    //arrUnhcrNum[i] = refugee[1]
+
+                    const fName = refugee[2]
+
+                    const lName = refugee[3]
+
+                    const sex = refugee[4]
+
+                    //const country = refugee[5]
+                    _country[i] = refugee[5]
+
+                    //count++
+
+                    const $newTaskTemplate = $taskTemplate.clone()
+
+                    //$newTaskTemplate.find('.unhcrNumber_SP').html(arrUnhcrNum[i])
+                    //$newTaskTemplate.find('.unhcrNumber_SP').html(unhcrNum)
+                    //$newTaskTemplate.find('.card_fName').html(fName)
+                    //$newTaskTemplate.find('.card_lName').html(lName)
+                    //$newTaskTemplate.find('.card_sex').html(sex)
+                    $newTaskTemplate.find('.mapCountry').html(_country[i])
+
+                    //$newTaskTemplate.find('.blockNumber').html(count)
+                    //alert(arrUnhcrNum[i])
+
+                    $('#mapTemplate').append($newTaskTemplate)
+
+                    $newTaskTemplate.show()
+
+
+
+                }
+
+                var countUS = 0
+                var countKR = 0
+                var countRS = 0
+                var countSY = 0
+                var countYN = 0
+
+                for (var j = 1; j <= refugeeCount; j++) {
+                    if (_country[j] === "United States") {
+                        countUS++
+                    }
+                    else if (_country[j] === "Korea") {
+                        countKR++
+                    }
+                    else if (_country[j] === "Russia") {
+                        countRS++
+                    }
+                    else if (_country[j] === "Syria") {
+                        countSY++
+                    }
+                    else if (_country[j] === "Yaman") {
+                        countYN++
+                    }
+
+                }
+
+                alert(countUS)
+
+                //let map = [...new Set(_country)];
+
+                //alert("Hey");
+
+
+
+
+            }
+
+
+
+        }
+
+        google.charts.load('current', {
+            'packages': ['geochart'],
+            // Note: you will need to get a mapsApiKey for your project.
+            // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+            'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+        });
+        google.charts.setOnLoadCallback(drawRegionsMap);
+
+        function drawRegionsMap() {
+
+            //need internet connection to display graph
+
+            var my = 300;
+
+            /*             $db = mysqli_connect('localhost', 'root', '', 'refugeedata');
+            
+                        $query = ("Select country, density FROM map ORDER BY id");
+            
+                        $result = mysqli_query($db, $query);
+            
+                        while ($record = mysqli_fetch_assoc($result)) {
+                            var data = google.visualization.arrayToDataTable([
+                                [$record['country'], $record['density']]
+                            ]);
+            
+                        }  */
+
+            // loop the outer array
+            /*             for (var i = 0; i < activities.length; i++) {
+                            // get the size of the inner array
+                            var innerArrayLength = activities[i].length;
+                            // loop the inner array
+                            for (var j = 0; j < innerArrayLength; j++) {
+                                console.log('[' + i + ',' + j + '] = ' + activities[i][j]);
+                            }
+                        } */
+
+            var record = [['Malaysia', 600], ['Germany', 500], ['Russia', 700], ['Canada', 900], ['United States', 300]];
+
+            /*             for (var i = 0; i < record.length; i++) {
+                            // get the size of the inner array
+                            var innerArrayLength = record[i].length;
+                            // loop the inner array
+                            for (var j = 0; j < innerArrayLength; j++) {
+                                //console.log('[' + i + ',' + j + '] = ' + activities[i][j]);
+                                var data = google.visualization.arrayToDataTable([
+                                    [record[0][0], record[0][1]]
+                                ]);
+                            }
+                        } */
+
+            //var x = 0; var y = 0; var i = 0; var j = 1;
+
+            /*             while (x < record.length) { //record.length
+            
+                            var data = google.visualization.arrayToDataTable([
+                                ['Country', 'Density'],
+                                [record[x][y], record[i][j]]
+                            ]);
+            
+                            x++; i++; j++;
+                        } */
+
+            //for (var i = 0; i < record.length; i++) {
+
+            /*                 var data = google.visualization.arrayToDataTable([
+                                ['Country', 'Density'],
+                                [record[0][0], record[0][1]],
+                                [record[1][0], record[1][1]],
+                                [record[2][0], record[2][1]],
+                                [record[3][0], record[3][1]],
+                                [record[4][0], record[4][1]]
+                            ]); */
+
+            // x++; i++; j++;
+            //}
+
+            //do while loop?
+
+            /*                          for (var i = 0; i < record.length; i++) {
+                        
+                                        var data = google.visualization.arrayToDataTable([
+                                            ['Country', 'Density'],
+                                            [record[i][0], record[i][1]],
+                                        ]);
+                                    }  */ //almost work
+
+            /*             var dataArray = [];
+                                                
+                        for (var i = 0; i < record.length; i++) {
+                            dataArray.push([record[i][0], record[i][1]]);
+                        }
+            
+                        var data = google.visualization.arrayToDataTable([['Country', 'Density'], dataArray]); */
+
+
+
+            /*                         var data = new google.visualization.DataTable();
+                                    data.addColumn('string', 'Country');
+                                    data.addColumn('number', 'Density');
+                        
+                                    //data.addRows(['United States', 700]);
+                        
+                                     for (var i = 0; i < record.length; i++) {
+                                        data.addRows([record[i][0], record[i][1]]);
+                                    }  */
+
+            /*             var data = new google.visualization.DataTable();
+                        data.addColumn('string', 'Country');
+                        data.addColumn('number', 'Density');
+            
+                        data.addRows(1);
+                        data.setValue('United States', 700 );  */
+
+
+
+            /*            data3 = [];
+           
+                       for (var i = 0; i < record.length; i++) {
+           
+                           var data = { Country : {}, Density: {}};
+           
+                           var data = google.visualization.arrayToDataTable([
+                               ['Country', 'Density'],
+                               [record[i][0], record[i][1]],
+                           ]);
+           
+           
+                           data3.push(data);
+                       } */
+
+            /*                                      var data = google.visualization.arrayToDataTable([
+                                                   ['Country', 'Density'],
+            
+                                                   [record[0][0], record[0][1]]
+                                               ]); */
+
+
+            var syria = "Syria";
+
+
+            var data = google.visualization.arrayToDataTable([
+                ['Country', 'Popularity'],
+                ['Afghanistan', 0],
+                [syria, 600],
+                ['Sudan', 700]
+                //[record[0][0], record[0][1]]
+            ]);
+
+            var options = {};
+
+            var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+            chart.draw(data, options);
+        }
+    </script> -->
+</head>
+
+<body style="background-image:url('bg8.jpg'); background-repeat: no-repeat; background-size: 1900px 1000px;">
+
+    <!--     <div id="mapTemplate">
+
+
+        <div class="mapData" style="display: none">
+            <p class="mapCountry" style="text-align: center;"></p>
+        </div> -->
+
+    <!--         <input type="submit" hidden="">
+
+        <div class="input-group"> <button type="submit" class="btn" id="btnMap" value="Submit"
+                onClick="App.displayMap()" style="cursor:pointer;">Update Map</button> </div> -->
+
+    <!--    </div> -->
+
+    <div id="mapTemplate">
+
+        <div class="mapData" style="display: none">
+            <!-- style="display: none" -->
+
+            <!--             <p style="text-align: center;">UNHCR NO:</p>
+            <p class="card_number" style="text-align: center;"></p>
+            <br>
+            <p style="text-align: center;">First Name:</p>
+            <p class="card_fName" style="text-align: center;"></p>
+            <p style="text-align: center;">Last Name:</p>
+            <p class="card_lName" style="text-align: center;"></p>
+            <br>
+            <p style="text-align: center;">Sex:</p>
+            <p class="card_sex" style="text-align: center;"></p>
+            <br>
+            <p style="text-align: center;">Country of Origin:</p> -->
+
+
+            <!-- <p class="mapCountry" style="text-align: center;"></p> -->
+            <!-- <div id="countryList" class="mapCountry" style="text-align: center;" ></div> -->
+        </div>
+
+    </div>
+
+    <!-- <button id="getMap" class="nextBtn">Get Map</button> -->
+
+    <script>
+
+        //var iterator = _country.values();
+
+        //alert(iterator.next().value);
+
+        var button = document.getElementById('getMap');
+        button.addEventListener('click', function () {
+            //document.location.href = 'map.html';
+
+            //var cookieValue = document.getElementById('countryList').getAttribute('value');
+            //var cookieValue = document.getElementById('countryList').innerHTML;
+            //var cookieValue = document.getElementById('countryList').text;
+            //var cookieValue = document.getElementById('countryList');
+            //var cookieValue = document.getElementById('getMap').textContent;
+            //var cookieValue = document.getElementById('countryList').textContent;
+            /* var cookieValue = document.getElementById('countryList');
+            htmlContent = cookieValue.innerHTML;
+            textContent = node.textContent;
+            alert(textContent); */
+
+            //alert(cookieValue);
+
+
+            /*               for (var i = 1; i <= 100; i++) //refugeeCount
+                        {
+                            //country[i] = $("#mapCountry").html();
+                            country[i] = $("#mapCountry").text();
+                        }
+            
+                        alert(country[i]);  
+                        alert("hey"); */
+        });
+
+        /*         for (var i = 1; i <= 100; i++) //refugeeCount
+                {
+                    //country[i] = $("#mapCountry").html();
+                    country[i] = $("#mapCountry").text();
+                } */
+
+        //alert(country[i]);
+        //alert("hey");
+
+    </script>
+
+
+    <script type="text/javascript"> //src="app.js"
+
+
+        //var iterator = _country.values();
+
+        google.charts.load('current', {
+            'packages': ['geochart'],
+            // Note: you will need to get a mapsApiKey for your project.
+            // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+            'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+        });
+        google.charts.setOnLoadCallback(drawRegionsMap);
+
+        function drawRegionsMap() {
+
+            var syria = "Syria";
+
+
+            var data = google.visualization.arrayToDataTable([
+                ['Country', 'Popularity'],
+                ['Afghanistan', 2700],
+                [syria, 6700],
+                ['Myanmar', 1100],
+                ['Somalia', 9000],
+                ['Sudan', 7250],
+                ['North Korea', 3500]
+                //[record[0][0], record[0][1]]
+            ]);
+
+            var options = {};
+
+            var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+            chart.draw(data, options);
+        }
+
+
+
+    </script>
+
+    <div id="regions_div" style="width: 1400px; height: 950px;"></div>
+
+
+    <!--     <div id="mapTemplate">
+
+
+        <div class="mapData" style="display: none">
+            <p class="mapCountry" style="text-align: center;"></p>
+        </div>
+
+        <input type="submit" hidden="">
+
+        <div class="input-group"> <button type="submit" class="btn" id="btnMap" value="Submit"
+                onClick="App.displayMap()" style="cursor:pointer;">Update Map</button> </div>
+
+    </div> -->
+
+
+    <script>
+
+        var button = document.getElementById('homePage');
+        button.addEventListener('click', function () {
+            document.location.href = 'home.html';
+        });
+
+        var button = document.getElementById('registerPage');
+        button.addEventListener('click', function () {
+            document.location.href = 'register.html';
+        });
+
+        var button = document.getElementById('mapPage');
+        button.addEventListener('click', function () {
+            document.location.href = 'map.html';
+        });
+
+        var button = document.getElementById('searchPage');
+        button.addEventListener('click', function () {
+            document.location.href = 'display.html';
+        });
+
+        var button = document.getElementById('cardPage');
+        button.addEventListener('click', function () {
+            document.location.href = 'card.html';
+        });
+
+        var button = document.getElementById('qrCodePage');
+        button.addEventListener('click', function () {
+            document.location.href = 'donate.html';
+        });
+
+    </script>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <script src="./js/web3.min.js"></script>
+
+    <script src="./js/truffle-contract.js"></script>
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>

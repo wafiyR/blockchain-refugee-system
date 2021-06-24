@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Refugee System | Home Page</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+        }
+
+        .bg {
+            /* The image used */
+            background-image: url("bg6.jpg");
+
+            /* Full height */
+            height: 120%;
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+            border-right: 1px solid #bbb;
+        }
+
+        li:last-child {
+            border-right: none;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #111;
+        }
+
+        .active {
+            background-color: #4CAF50;
+        }
+    </style>
+
+</head>
+
+
+
+<body>
+
+    <ul>
+        <li id="homePage"><a class="active" href="#home">Home</a></li>
+        <li id="searchPage"><a href="#search">Search</a></li>
+        <li id="registerPage"><a href="#register">Register</a></li>
+        <li id="cardPage"><a href="#card">UNHCR Card</a></li> 
+        <li id="mapPage"><a href="#map">Map</a></li>
+        <li id="qrCodePage" style="float:right"><a href="#placement">QR Code</a></li>
+    </ul>
+    <!--style="background-image:url('bg4.jpg');  background-repeat: no-repeat; background-position: center; background-size: cover; height: 100%;  "-->
+    <!--background-attachment: fixed;-->
+    <div class="bg"></div>
+
+    <script>
+
+        var button = document.getElementById('homePage');
+        button.addEventListener('click', function () {
+            document.location.href = 'home.html';
+        });
+
+        var button = document.getElementById('registerPage');
+        button.addEventListener('click', function () {
+            document.location.href = 'register.html';
+        });
+
+        var button = document.getElementById('mapPage');
+        button.addEventListener('click', function () {
+            document.location.href = 'map.html';
+        });
+
+        var button = document.getElementById('searchPage');
+        button.addEventListener('click', function () {
+            document.location.href = 'display.html';
+        });
+
+        var button = document.getElementById('cardPage');
+        button.addEventListener('click', function () {
+            document.location.href = 'card.html';
+        });
+
+        var button = document.getElementById('qrCodePage');
+        button.addEventListener('click', function () {
+            document.location.href = 'donate.html';
+        });
+
+    </script>
+
+</body>
+
+</html>

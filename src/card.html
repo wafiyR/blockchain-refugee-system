@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Refugee System | UNHCR Card</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+            border-right: 1px solid #bbb;
+        }
+
+        li:last-child {
+            border-right: none;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #111;
+        }
+
+        .active {
+            background-color: #4CAF50;
+        }
+    </style>
+
+</head>
+
+<body
+    style="background-image:url('unhcrCard.jpg'); background-attachment: fixed; background-repeat: no-repeat; background-position: 50% 50%; ">
+    <!--background-size: 2100px 1600px;-->
+
+    <ul>
+        <li id="homePage"><a  href="#home">Home</a></li>
+        <li id="searchPage"><a href="#search">Search</a></li>
+        <li id="registerPage"><a href="#register">Register</a></li>
+        <li id="cardPage"><a class="active" href="#card">UNHCR Card</a></li>
+        <li id="mapPage"><a href="#map">Map</a></li>
+        <li id="qrCodePage" style="float:right"><a href="#placement">QR Code</a></li>
+    </ul>
+
+    <p id="output" style="text-align: center;"></p>
+
+    <br><br><br>
+
+    <h1 style="text-align: center;">UNHCR Card</h1>
+
+    <br><br><br>
+
+    <!-- <img src="unhcrCard.jpg" style="display: block;  margin-left: auto; margin-right: auto;"> -->
+    <!--width="500" height="333"-->
+
+    <div id="cardTemplate">
+
+        <div class="unhcrCard" style="display: none">
+            <!-- style="display: none" -->
+
+            <p style="position:absolute; left:46%; top:40%;">UNHCR NO:</p>
+            <!--text-align: center;-->
+            <div class="card_number" style="position:absolute; left:46%; top:42%;"></div>
+            <!-- <p class="card_number" style="text-align: center;"></p> -->
+            <br>
+            <p style="position:absolute; left:46%; top:45%;">First Name:</p>
+            <p class="card_fName" style="position:absolute; left:46%; top:47%;"></p>
+            <p style="position:absolute; left:46%; top:49%;">Last Name:</p>
+            <p class="card_lName" style="position:absolute; left:46%; top:51%;"></p>
+            <br>
+            <p style="position:absolute; left:58%; top:45%;">Sex:</p>
+            <p class="card_sex" style="position:absolute; left:58%; top:47%;"></p>
+            <br>
+            <p style="position:absolute; left:46%; top:54%;">Country of Origin:</p>
+            <p class="card_country" style="position:absolute; left:54%; top:54%;"></p>
+        </div>
+
+    </div>
+
+    <script>
+
+        var button = document.getElementById('homePage');
+        button.addEventListener('click', function () {
+            document.location.href = 'home.html';
+        });
+
+        var button = document.getElementById('registerPage');
+        button.addEventListener('click', function () {
+            document.location.href = 'register.html';
+        });
+
+        var button = document.getElementById('mapPage');
+        button.addEventListener('click', function () {
+            document.location.href = 'map.html';
+        });
+
+        var button = document.getElementById('searchPage');
+        button.addEventListener('click', function () {
+            document.location.href = 'display.html';
+        });
+
+        var button = document.getElementById('cardPage');
+        button.addEventListener('click', function () {
+            document.location.href = 'card.html';
+        });
+
+        var button = document.getElementById('qrCodePage');
+        button.addEventListener('click', function () {
+            document.location.href = 'donate.html';
+        });
+
+    </script>
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <script src="./js/web3.min.js"></script>
+
+    <script src="./js/truffle-contract.js"></script>
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>

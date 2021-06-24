@@ -1,0 +1,63 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Officer Login Form</title>
+    <link rel="stylesheet" href="style-login.css">
+</head>
+
+<body>
+    <div class="login-page">
+        <div class="form">
+            <form class="login-form">
+                <h2>Log In</h2>
+                <input type="text" name="userid" placeholder="User name" required>
+                <input type="password" name="pswrd" placeholder="Password" required>
+                <!-- <input type="submit"> -->
+                <button onclick="check(this.form)" value="Login">LOGIN</button>
+                <p class="message">
+                    <!--<a class="left"  href="#">Forget Password</a>
+					<a class="right"  href="#">Register</a>  -->
+                </p>
+            </form>
+
+            <form class="register-form">
+                <h2>Register Here</h2>
+                <input type="text" placeholder="User name" />
+                <input type="text" placeholder="Email " />
+                <input type="text" placeholder="Password" />
+                <input type="text" placeholder="Confirm Password" />
+                <button>Create</button>
+                <p class="message"> <a href="#">Already Register?</a></p>
+            </form>
+        </div>
+    </div>
+
+    <script src='https://code.jquery.com/jquery-3.4.1.min.js'> </script>
+
+    <script>
+
+        function check(form)/*function to check userid & password*/ {
+            /*the following code checkes whether the entered userid and password are matching*/
+            if (form.userid.value == "B031710286" && form.pswrd.value == "123456") {
+                window.open('home.html')/*opens the target page while Id & password matches*/
+            }
+            else {
+                alert("Error Password or Username")/*displays error message*/
+            }
+        }
+
+
+    </script>
+
+    <script>
+        $('.message a').click(function () {
+            $('form').animate({ height: "toggle", opacity: "toggle" }, "slow");
+        });
+    </script>
+
+</body>
+
+</html>
