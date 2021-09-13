@@ -37,6 +37,7 @@ The administration login page will need the admin to insert their credentials, s
 The administrator need to insert the UNHCR number, in order to search the data of the refugees in the Blockchain, and validate their registration. Once submitted, it will display the block number and the UNHCR number, which indicates that the refugee has been registered.
 
 ![image](https://user-images.githubusercontent.com/62368837/133061564-e56e6895-8930-4ed1-bc8e-28e8160f06a0.png)
+
 Refugee's Information in Ganache
 
 If the refugees had already been registered in the system, the block number and UNHCR number of the refugee will be displayed on the web page. With the block number, the
