@@ -73,6 +73,7 @@ The map is displayed by using JavaScript and GeoChart. The module will display t
 The figure above shows the QR code, that stores the UNHCR card details of specific refugees. Each QR codes will be uniquely generated, which each of them will store the UNHCR card details for specific refugees.
 
 ![image](https://user-images.githubusercontent.com/62368837/133062916-a93da317-932e-4b3a-a27d-0721ad09d4f9.png)
+
 Displaying UNHCR cards on smartphone.
 
 Once the QR code had been scanned, it will bring the users to the website, that will show the UNHCR card details in PDF format.
